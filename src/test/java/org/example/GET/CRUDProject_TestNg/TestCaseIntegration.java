@@ -39,6 +39,7 @@ public class TestCaseIntegration {
 
         //Extract The token
         token = response.jsonPath().getString("token");
+//      token = response.then().extract().path("token");
         System.out.println(token);
         return token;
     }
@@ -115,7 +116,7 @@ public class TestCaseIntegration {
         requestSpecification.contentType(ContentType.JSON);
 
 
-        response = requestSpecification.get();
+        response = requestSpecification.when().get();
 
         validatableResponse = response.then().log().all();
         validatableResponse.statusCode(200);
@@ -123,12 +124,13 @@ public class TestCaseIntegration {
         String firstname = response.then().extract().path("firstname");
         String lastname = response.then().extract().path("lastname");
 
+
         assertThat(firstname).isEqualTo("Krishna").isNotEmpty().isNotBlank();
         assertThat(lastname).isEqualTo("Lahari").isNotEmpty().isNotBlank();
         System.out.println("Completed the Get Request");
     }
 
-    @Test(dependsOnMethods = "test_update_request_get")
+    @Test
     public void test_delete_booking()
     {
         System.out.println("The Deleted Operation Begins");
@@ -136,6 +138,10 @@ public class TestCaseIntegration {
                 "    \"username\" : \"admin\",\n" +
                 "    \"password\" : \"password123\"\n" +
                 "} ";
+
+        token = getToken();
+        Bookingid = getBookingId();
+
 
         requestSpecification = RestAssured.given();
         requestSpecification.baseUri("https://restful-booker.herokuapp.com/");
@@ -147,6 +153,7 @@ public class TestCaseIntegration {
         validatableResponse.statusCode(201);
 
         System.out.println("The Booking Deleted Successfully");
+        System.out.println(Bookingid);
 
     }
     @Test(dependsOnMethods = "test_delete_booking")
@@ -161,7 +168,7 @@ public class TestCaseIntegration {
         requestSpecification.contentType(ContentType.JSON);
 
 
-        response = requestSpecification.get();
+        response = requestSpecification.when().get();
 
         validatableResponse = response.then().log().all();
         validatableResponse.statusCode(404);
