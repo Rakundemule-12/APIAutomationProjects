@@ -40,13 +40,13 @@ public class AssertJ {
         validatableResponse.statusCode(200);
 
         Bookingid = response.jsonPath().getString("bookingid");
-        System.out.println(Bookingid);
+        System.out.println("Here is the bookingID "+Bookingid);
 
-        Integer Bookingid = response.then().extract().path("bookingid");
+        Integer Bookingid1 = response.then().extract().path("bookingid");
         String firstname = response.then().extract().path("booking.firstname");
+        System.out.println("Verified "+Bookingid1);
 
-
-        assertThat(Bookingid).isNotNull().isNotZero().isPositive();
+        assertThat(Bookingid1).isNotNull().isNotZero().isPositive();
         assertThat(firstname).isEqualTo("Josh").isNotEmpty().isNotBlank();
 
     }

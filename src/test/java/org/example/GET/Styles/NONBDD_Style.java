@@ -12,8 +12,8 @@ public class NONBDD_Style {
     private static void test2() {
         RequestSpecification r = RestAssured.given();
         r.baseUri("https://restful-booker.herokuapp.com");
-        r.basePath("/booking/313");
-        r.when().get().then().statusCode(200).log().body();
+        r.basePath("/booking/1454");
+        r.when().get().then().log().all().statusCode(200).log().body();
     }
 
     private static void test1() {

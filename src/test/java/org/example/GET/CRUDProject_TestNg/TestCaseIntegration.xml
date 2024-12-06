@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="APIAutomationProjects">
         <classes>
-            <class name="org.example.GET.CRUDProject_TestNg.TestCaseIntegration">
+            <class name="org.example.GET.CRUDProject_TestNg.Integration_Scenerio2">
             </class>
         </classes>
     </test>
